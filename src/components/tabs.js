@@ -18,30 +18,15 @@ import axios from 'axios';
 const Tabs = (topics) => {
 
   const tabstopics = document.createElement('div');
-
-  // topics.forEach(topic => {
-  //   console.log(topic)
-  //   const tabtopic = document.createElement('div');
-  //   tabtopic.classList.add('tab');
-  //   tabtopic.textContent = topic;
-  //   tabstopics.appendChild(tabtopic)
-  // });
-  const tab1 = document.createElement('div');
-  const tab2 = document.createElement('div');
-  const tab3 = document.createElement('div');
-
   tabstopics.classList.add('topics');
-  tab1.classList.add('tab');
-  tab2.classList.add('tab');
-  tab3.classList.add('tab');
 
-  tab1.textContent = topics[0];
-  tab2.textContent = topics[1];
-  tab3.textContent = topics[2];
-
-  tabstopics.appendChild(tab1);
-  tabstopics.appendChild(tab2);
-  tabstopics.appendChild(tab3);
+  topics.forEach(topic => {
+    console.log(topic)
+    const tabtopic = document.createElement('div');
+    tabtopic.classList.add('tab');
+    tabtopic.textContent = topic;
+    tabstopics.appendChild(tabtopic)
+  });
 
   return tabstopics
 }
@@ -58,7 +43,7 @@ const tabsAppender = (selector) => {
 
   axios.get(`http://localhost:5000/api/topics`)
   .then( response =>{
-    // console.log('responseeee',response.data.topics);
+    console.log('responseeee',response.data.topics);
     const newTabs = Tabs(response.data.topics);
     const entrypoint = document.querySelector(selector);
     entrypoint.appendChild(newTabs)

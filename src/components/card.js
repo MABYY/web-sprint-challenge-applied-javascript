@@ -68,7 +68,6 @@ const cardAppender = (selector) => {
   
 
       const  arrtops =  Object.keys(response.data.articles)
-    console.log('topics',arrtops)
     arrtops.forEach(topic =>{
       const articles = response.data.articles[topic]
       console.log(articles);
