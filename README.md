@@ -65,7 +65,27 @@ In meeting the minimum viable product (MVP) specifications listed below, your pr
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What is the DOM?
+
+The DOM is a Javascript object which contains a model of every element in order on the webpage. When the webpage is loaded to the browser, it looks at the HTML file and uses it as a set of instructions to build the page and creates the DOM. The DOM is built as a data structure known as a 'Tree', because parent elements have nested children elements (or leaves). 
+
 2. What is an event?
+
+An event happens every the user interacts with a website that the browser can track. When an event happens on a page, it is known as a trigger.
+
 3. What is an event listener?
+
+The browser is always tracking events. In roder to be able to to listen for specific events on specific elements The tracking process and subsequent action taken is called an event listener. We put an event listener on an element and give it a callback. When that event is triggered on the element, the callback is run.
+
 4. Why would we convert a NodeList into an Array?
+
+When we use querySelectorAll() we get back a NodeList. It's not actually a JavaScript methods but a browser API that let you access DOM elements. You can then manipulate them with JavaScript. We refer it to as 'array-like object.'  
+
+The native JavaScript ES6 release brought a handful of helpful methods for working with arrays: Array.forEach(), Array.every(), Array.some(), Array.filter(), and more. Unfortunately, you can’t use any of these with the elements you get back when using querySelectorAll(), because it returns a NodeList, not an array.
+
+The Array class contains a method we can use to create an array from an array-like object, called .from(). To use this, we would give .from the array-like object as its only argument.
+
+Array.from(arrayLikeObject)
+
 5. What is a component?
+
+A component is made of several parts: HTML, CSS, or JavaScript brought together for reuse in a website or application. It's resusable code. 

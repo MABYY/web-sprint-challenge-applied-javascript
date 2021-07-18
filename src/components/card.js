@@ -1,5 +1,6 @@
-const Card = (article) => {
-  // TASK 5
+import axios from 'axios';
+ 
+ // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
   // It takes as its only argument an "article" object with `headline`, `authorPhoto` and `authorName` properties.
@@ -17,9 +18,35 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+
+const Card = (article) => {
+
+  const card = document.createElement('div')
+  const headline = document.createElement('div')
+  const author = document.createElement('div')
+  const imgdiv = document.createElement('div')
+  const image = document.createElement('img')
+  const name = document.createElement('span')  
+
+  card.classList.add('card')
+  headline.classList.add('headline')
+  author.classList.add('author')
+  imgdiv.classList.add('img-container')
+
+  headline.textContent = article.headline
+  image.src = article.authorPhoto
+  name.textContent = `By ${article.authorName}`
+
+  card.appendChild(headline)
+  card.appendChild(author)
+  card.appendChild(imgdiv)
+  card.appendChild(image)
+  card.appendChild(name)
+ 
+return card
+
 }
 
-const cardAppender = (selector) => {
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -28,6 +55,44 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+const cardAppender = (selector) => {
+
+
+  axios.get(`http://localhost:5000/api/articles`).then( response =>{
+    
+    // topics = ["javascript", "bootstrap", "technology"] 
+   
+    const javasArticles= response.data.articles.javascript
+    javasArticles.forEach(article => {
+      console.log(article);
+      const newCard = Card(article);
+      const entrypoint = document.querySelector(selector);
+      entrypoint.appendChild(newCard)
+      
+    });
+
+    const bootstrapArticles= response.data.articles.bootstrap
+    bootstrapArticles.forEach(article => {
+      console.log(article);
+      const newCard = Card(article);
+      const entrypoint = document.querySelector(selector);
+      entrypoint.appendChild(newCard)
+      
+    });
+
+    const technologyArticles= response.data.articles.technology
+    technologyArticles.forEach(article => {
+      console.log(article);
+      const newCard = Card(article);
+      const entrypoint = document.querySelector(selector);
+      entrypoint.appendChild(newCard)
+      
+    });
+  })
+  .catch((err) => {
+    console.log('error!', err)
+  })
+
 }
 
 export { Card, cardAppender }
