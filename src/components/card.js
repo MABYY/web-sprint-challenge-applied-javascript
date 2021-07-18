@@ -6,7 +6,8 @@ import axios from 'axios';
   // It takes as its only argument an "article" object with `headline`, `authorPhoto` and `authorName` properties.
   // The tags used, the hierarchy of elements and their attributes must match the provided markup exactly!
   // The text inside elements will be set using their `textContent` property (NOT `innerText`).
-  // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
+  // Add a listener for click events so that when a user clicks on a card, 
+  // the headline of the article is logged to the console.
   //
   // <div class="card">
   //   <div class="headline">{ headline }</div>
@@ -37,11 +38,16 @@ const Card = (article) => {
   image.src = article.authorPhoto
   name.textContent = `By ${article.authorName}`
 
+  card.addEventListener('click', ()=>{
+    console.log(headline)
+  })
+
   card.appendChild(headline)
   card.appendChild(author)
   card.appendChild(imgdiv)
   card.appendChild(image)
   card.appendChild(name)
+  
  
 return card
 
@@ -59,35 +65,19 @@ const cardAppender = (selector) => {
 
 
   axios.get(`http://localhost:5000/api/articles`).then( response =>{
-    
-    // topics = ["javascript", "bootstrap", "technology"] 
-   
-    const javasArticles= response.data.articles.javascript
-    javasArticles.forEach(article => {
-      console.log(article);
-      const newCard = Card(article);
-      const entrypoint = document.querySelector(selector);
-      entrypoint.appendChild(newCard)
-      
-    });
+  
 
-    const bootstrapArticles= response.data.articles.bootstrap
-    bootstrapArticles.forEach(article => {
-      console.log(article);
-      const newCard = Card(article);
-      const entrypoint = document.querySelector(selector);
-      entrypoint.appendChild(newCard)
-      
-    });
-
-    const technologyArticles= response.data.articles.technology
-    technologyArticles.forEach(article => {
-      console.log(article);
-      const newCard = Card(article);
-      const entrypoint = document.querySelector(selector);
-      entrypoint.appendChild(newCard)
-      
-    });
+      const  arrtops =  Object.keys(response.data.articles)
+    console.log('topics',arrtops)
+    arrtops.forEach(topic =>{
+      const articles = response.data.articles[topic]
+      console.log(articles);
+      articles.forEach(article =>{
+        const newCard = Card(article);
+        const entrypoint = document.querySelector(selector);
+        entrypoint.appendChild(newCard)
+      })
+    })
   })
   .catch((err) => {
     console.log('error!', err)
